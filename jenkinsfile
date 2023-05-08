@@ -1,0 +1,23 @@
+pipeline{
+      agent any
+      tools {nodejs "node16"}
+    stages{
+        stage('checkout code'){
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jyothi-jyo1998/project-.git']])
+            }
+        }   
+        stage('Build'){
+           steps {
+             sh 'npm install'
+              sh '<<Build Command>>'
+            }
+        }  
+        stage('Test'){
+            steps {
+              sh 'node test'
+            }
+        } 
+    }
+        
+}
